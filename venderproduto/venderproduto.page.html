@@ -1,0 +1,139 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/contasareceber']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Contas do {{provider.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="contas == undefined">
+        <ion-list>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+              <ion-thumbnail slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-thumbnail>
+              <ion-label>
+                <h3>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <p>
+                  <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </p>
+                <p>
+                  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-thumbnail>
+              <ion-label>
+                <h3>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <p>
+                  <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </p>
+                <p>
+                  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+              </ion-label>
+            </ion-item>
+        </ion-list>
+      </div>
+      <div *ngIf="contas == 1"  style="position: absolute; left:20%;  top: 50%;">
+        <ion-item lines="none"><ion-icon color="light"  name="sad"></ion-icon>
+          <ion-label color="light">Não há itens registrados.</ion-label></ion-item>
+      </div>
+      <div *ngIf="contas != undefined">
+    <ion-virtual-scroll [items]="contas" >
+      <ion-list *virtualItem="let item;">
+          <ion-card style="margin: 0;" >
+              <ion-item lines="none" >
+                  <ion-icon (press)="desfazer(item)" name="calendar"></ion-icon>
+                  <ion-label text-center>{{item.data}}</ion-label>
+                </ion-item>
+          <ion-item lines="none">
+              <ion-icon (press)="desfazer(item)" slot="start" name="cart"></ion-icon>
+            <ion-label>{{item.nomeproduto}}</ion-label>
+            <ion-badge style="margin: 0;" color="tertiary" slot="end">Qntd: {{item.quantidade}}</ion-badge>
+            <ion-badge style="margin: 0;" color="tertiary" slot="end">R$: {{item.preco}}</ion-badge>
+          </ion-item>
+          <ion-item  lines="none">
+              <ion-icon  name="person" slot="start"></ion-icon>
+              <ion-label>{{item.nome}}</ion-label>
+            </ion-item>
+          </ion-card>
+      </ion-list>
+  </ion-virtual-scroll>
+</div>
+
+
+    </ion-content>
+
+      <ion-toolbar >
+          <form  [formGroup]="form">
+              <ion-item>
+                  <ion-label position="stacked">Digite o Valor a ser Recebido</ion-label>
+                  <ion-input  type="number" formControlName="valor" type="number" ></ion-input>
+                </ion-item>
+           </form>
+          <ion-grid>
+              <ion-row>
+                  <ion-col style="border: 1px solid  #a2a4ab;"  size="12" text-center>
+                      <ion-item>
+                          <ion-icon style="color:blueviolet" slot="start" name="cash"></ion-icon>
+                          <ion-label style="color:blueviolet"><b>Recebidos</b></ion-label>
+                          <ion-badge color="success" slot="end">R$ {{provider.recebido}}</ion-badge>     
+                      </ion-item>
+                      <ion-item>
+                            <ion-icon style="color:blueviolet" slot="start" name="calculator"></ion-icon>
+                             <ion-label style="color:blueviolet">Conta</ion-label>
+                            <ion-badge slot="end" color="danger">R$ {{provider.preco}}</ion-badge>
+                        </ion-item>
+            </ion-col>
+          </ion-row>
+
+         
+
+           <ion-row>
+                <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+                  <ion-button [disabled]="form.invalid" (click)="tipovenda = 'dinheiro';dinheiro()" style="color:blueviolet" fill="clear"  expand="full">
+                      <b>Receber</b></ion-button>
+               </ion-col>
+                 <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+                    <ion-button [disabled]="form.invalid" (click)="tipovenda = 'cartao';dinheiro()" style="color:blueviolet" fill="clear"  expand="full">
+                        <b>Receber a<br>
+                          Cartão</b></ion-button>
+                 </ion-col>
+               </ion-row>
+  
+             </ion-grid>
+               </ion-toolbar>
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-grid>
+      <h1 text-center>Next Case</h1>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+    
+          <div padding>
+            <form [formGroup]="form">
+            <ion-item>
+                <ion-icon slot="start" name="ios-mail"></ion-icon>
+              <ion-input formControlName="email" type="text" placeholder="E-mail"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+                <ion-icon slot="start" name="key"></ion-icon>
+              <ion-input formControlName="senha" type="password" placeholder="Senha"></ion-input>
+            </ion-item>
+          </form>
+          </div>
+    
+          <div padding text-center>
+              <ion-button [disabled]="form.invalid" (click)="login()" color="tertiary" fill="outline">
+                  <ion-icon slot="start" name="send" ></ion-icon>
+                  Entrar
+                </ion-button>
+                <br>
+                <br>
+    
+                <ion-button [routerLink]="['/cadlogin']" color="tertiary" fill="outline" style="height:  35px;">
+                    <ion-icon slot="start" name="person-add" ></ion-icon>
+                   Criar conta
+                  </ion-button>
+          </div>
+    
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  

@@ -1,0 +1,38 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/despesasmensais']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Cadastrar Despesa Mensal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="form" >
+  <ion-item>
+      <ion-label position="floating">Nome da despesa</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Preço</ion-label>
+      <ion-input type="number" formControlName="valor"></ion-input>
+    </ion-item>
+            <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select type="text" formControlName="tipo">
+          <ion-select-option value="Consumo">Consumo</ion-select-option>
+          <ion-select-option value="Salário">Salários</ion-select-option>
+          <ion-select-option value="Aluguel">Aluguel</ion-select-option>
+          <ion-select-option value="Outros">Outros</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+</ion-content>
+<ion-toolbar>
+  <ion-row>
+     <ion-col style="border: 1px solid  #a2a4ab;" text-center size="12">
+        <ion-button [disabled]="form.invalid" (click)="cadastrar()"  style="color:blueviolet" fill="clear"  expand="full">
+          <ion-icon name="checkmark"></ion-icon><br>  <b>Cadastrar</b></ion-button>
+     </ion-col>
+   </ion-row>
+  </ion-toolbar>

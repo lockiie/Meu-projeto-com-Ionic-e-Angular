@@ -1,0 +1,64 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/home']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title> Cadastrar Produto</ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formcadproduto">
+      <ion-list lines="none">
+        <ion-item class="div">
+          <ion-input type="text" formControlName="nome" placeholder="Nome do produto"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+          <ion-input type="number" formControlName="pg" placeholder="Preço Pago"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+            <ion-input type="number" formControlName="pm" placeholder="Preço minimo para a venda"
+            ></ion-input>
+          </ion-item>
+        <ion-item class="div">
+          <ion-input type="number" formControlName="quantidade" placeholder="Quantidade"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+          <ion-input type="text" formControlName="descricao" placeholder="Descrição"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+          <ion-label>Box:</ion-label>
+          <ion-select formControlName="box" placeholder="Selecione">
+              <ion-select-option  *ngFor="let item of boxlist" value="{{item.box}}">{{item.box}}</ion-select-option>
+            </ion-select>            
+    </ion-item>
+
+      </ion-list>
+    </form>
+
+
+
+</ion-content>
+  <ion-toolbar >
+      <ion-grid>
+          <ion-row>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+                <ion-button (click)="cadproduto();manter = false" [disabled]="formcadproduto.invalid" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Cadastrar</b>
+        </ion-button>
+             </ion-col>
+             <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+                <ion-button (click)="cadproduto();manter = true" [disabled]="formcadproduto.invalid" style="color:blueviolet" fill="clear"  expand="full">
+                    <b>Cadastrar e<br>
+                      manter na tela</b>
+</ion-button>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+           </ion-toolbar>
+    

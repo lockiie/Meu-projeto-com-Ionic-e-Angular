@@ -1,0 +1,60 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/login']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Criar Conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+      <ion-item>
+        <ion-icon slot="start" name="person"></ion-icon>
+      <ion-label position="floating">Nome completo</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="ios-mail"></ion-icon>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="phone-portrait"></ion-icon>
+      <ion-label position="floating">Celular</ion-label>
+      <ion-input type="number" formControlName="celular"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="key"></ion-icon>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="key"></ion-icon>
+      <ion-label position="floating">Confirmar Senha</ion-label>
+      <ion-input type="password" formControlName="confirmarsenha"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="locate"></ion-icon>
+        <ion-label position="floating">Box</ion-label>
+        <ion-input type="text" formControlName="box"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-icon slot="start" name="home"></ion-icon>
+          <ion-label position="floating">Nome Empresa</ion-label>
+          <ion-input type="text" formControlName="nomeempresa"></ion-input>
+        </ion-item>
+
+    </form>
+</ion-content>
+<ion-toolbar >
+  <ion-grid>
+      <ion-row>
+         <ion-col style="border: 1px solid  #a2a4ab;"  size="12" text-center>
+            <ion-button  (click)="cadlogin()" [disabled]="form.invalid"  style="color:blueviolet"   fill="clear" expand="full">
+              <b>Cadastrar</b>
+    </ion-button>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+       </ion-toolbar>

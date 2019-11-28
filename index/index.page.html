@@ -1,0 +1,185 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons>
+            <ion-menu-button></ion-menu-button>
+            <ion-title>Inicio</ion-title>
+          </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+<ion-item>
+  <ion-label>Mês</ion-label>
+  <ion-select [(ngModel)]="meses" (ionChange)="metodoano()">
+    <ion-select-option value="0">Janeiro</ion-select-option>
+    <ion-select-option value="1">Fevereiro</ion-select-option>
+    <ion-select-option value="2">Março</ion-select-option>
+    <ion-select-option value="3">Abril</ion-select-option>
+    <ion-select-option value="4">Maio</ion-select-option>
+    <ion-select-option value="5">Junho</ion-select-option>
+    <ion-select-option value="6">Julho</ion-select-option>
+    <ion-select-option value="7">Agosto</ion-select-option>
+    <ion-select-option value="8">Setembro</ion-select-option>
+    <ion-select-option value="9">Outubro</ion-select-option>
+    <ion-select-option value="10">Novembro</ion-select-option>
+    <ion-select-option value="11">Dezembro</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<p class="ion-text-center" color="tertiary"><b>VENDAS À </b></p>
+<ion-card>
+  <ion-item>
+    <ion-icon color="medium" name="cash" slot="start"></ion-icon>
+    <ion-label class="ion-text-center"><b>Dinheiro</b></ion-label>
+    <ion-icon slot="end" color="success" name="arrow-round-up"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{totaldinheiro}}</ion-label>
+    <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+  </ion-item>
+</ion-card>
+<ion-card>
+  <ion-item>
+    <ion-icon color="medium" name="card" slot="start"></ion-icon>
+    <ion-label class="ion-text-center"><b>Cartão</b></ion-label>
+    <ion-icon slot="end" color="success" name="arrow-round-up"></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{totalcartao}}</ion-label>
+    <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+
+  </ion-item>
+</ion-card>
+<p class="ion-text-center" color="tertiary"><b>CONTROLE DE VENDAS</b></p>
+<ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label class="ion-text-center">TOTAL</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{somavendas}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" color="success" name="arrow-round-forward"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-item>
+        <ion-label class="ion-text-center">QUANTIDADE</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">{{qsomavendas}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" slot="end" color="success" name="arrow-round-forward"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+
+      </ion-item>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-card>
+<p class="ion-text-center"><b>CONTROLE DE COMPRAS</b></p>
+<ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label class="ion-text-center">TOTAL</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{somacompras}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" color="warning" name="undo"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label class="ion-text-center">QUANTIDADE</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">{{qsomacompras}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" color="warning" slot="end" name="undo"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card>
+
+<p class="ion-text-center"><b>DESPESAS MENSAIS</b></p>
+<ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label class="ion-text-center">TOTAL</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{despesas}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" color="danger" name="arrow-round-forward"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card>
+<p class="ion-text-center"><b>PREJUÍZOS</b></p>
+<ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label class="ion-text-center">TOTAL</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label *ngIf="verificar != 0" class="ion-text-center">R$ {{prejuizos}}</ion-label>
+        <ion-icon *ngIf="verificar != 0" color="danger" name="arrow-round-forward"></ion-icon>
+        <ion-label *ngIf="verificar == 0" class="ion-text-center"><ion-spinner name="bubbles"></ion-spinner></ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-card>
+<p *ngIf="listar" class="ion-text-center"><b>FUNCIONÁRIOS</b></p>
+<ion-card *ngFor="let item of listar">
+    <ion-item>
+        <ion-icon color="medium" name="person"></ion-icon>
+      <ion-label class="ion-text-center"><b>{{item.nome}}</b></ion-label>
+      <ion-badge slot="end" color="light">{{item.box}}</ion-badge>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Total de Vendas</ion-label>
+      <ion-badge slot="end" color="success">R$ {{item.tvenda}}</ion-badge>
+      
+    </ion-item>
+    <ion-item>
+        <ion-label>Quantidade de Vendas</ion-label>
+        <ion-badge slot="end" color="success">{{item.vquantidade}}</ion-badge>
+        
+      </ion-item>
+      <ion-item>
+          <ion-label>Total de Compras</ion-label>
+          <ion-badge slot="end" color="warning">R$ {{item.tcompra}}</ion-badge>
+        </ion-item>
+        <ion-item>
+            <ion-label >Quantidade de Compras</ion-label>
+            <ion-badge slot="end" color="warning">{{item.qcompra}}</ion-badge>
+          </ion-item>
+  </ion-card>
+
+
+
+</ion-content>

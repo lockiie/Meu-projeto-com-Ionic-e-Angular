@@ -1,0 +1,88 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons>
+            <ion-menu-button></ion-menu-button>
+            <ion-title>Chat</ion-title>
+          </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content  #content >
+    <div *ngIf="!mensagens">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+      </ion-list>
+      </div>
+      <div *ngIf="mensagens == 1"  style="position: absolute; left:20%;  top: 50%;">
+        <ion-item lines="none"><ion-icon color="light"  name="sad"></ion-icon>
+          <ion-label color="light">Não há Mensagens.</ion-label></ion-item>
+      </div>
+      <div *ngIf="mensagens"  id="14" style="display: none" >
+        <ion-button  *ngIf="mensagens.length == 30" (click)="limite = limite + 10;getmensagens()" fill="outline" expand="block" >Carregar mais mensagens antigas!</ion-button>
+        <ion-list #lista lines="none" style="padding: 0" *ngFor="let item of mensagens;let index = index;">
+          <p text-center><ion-badge *ngIf="item.data">{{item.data}}</ion-badge></p>
+    <ion-item lines="none">
+        <ion-card  lines="none" *ngIf="item.id == provider.id" slot="end" style="background-color: rgb(169, 224, 143); color: black; margin-right: 1px;">
+            <ion-card-content  class="ion-no-padding" style="margin: 5px;max-width:280px"  >
+              <p style="margin-right: 3px;">{{item.nome}}</p>
+              {{item.mensagem}} <ion-note style="color: dimgrey " item-end>{{item.hora}}</ion-note>
+            </ion-card-content>   
+          </ion-card>
+      <ion-card lines="none" *ngIf="item.id != provider.id"  color="light" style="margin-left: 1px;">
+          <ion-card-content no-padding  style="margin: 5px;max-width:280px;" >
+            <p style="margin-left: 3px;">{{item.nome}}</p>
+            {{item.mensagem}} <ion-note item-end>{{item.hora}}</ion-note>
+          </ion-card-content>    
+      </ion-card>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer >
+    <ion-item >
+      <ion-input  style="border-radius: 50px; background-color: white; " type="text" (keyup.enter)="mensagem(); novamensagem=''" placeholder="Message..." [(ngModel)]="novamensagem"></ion-input>
+      <ion-button [disabled]="novamensagem == ''" fill="outline"  expand="block" color="dark" slot="end" (click)="mensagem(); novamensagem=''">
+        <ion-icon style="font-size: 25px;" name="send"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+  </ion-footer>
+   

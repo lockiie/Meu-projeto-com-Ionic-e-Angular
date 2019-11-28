@@ -1,0 +1,71 @@
+<ion-app>
+  <ion-split-pane >
+    <ion-menu type="overlay">
+        <ion-content color="medium">
+            <ion-menu-toggle auto-hide="false" *ngIf="provider.id">
+            <ion-grid>
+                <ion-row>
+                    <ion-col text-center>
+                      <ion-card>
+                          <ion-item lines="none" color="medium">
+                              <ion-icon style="font-size: 20px;" slot="start" name="briefcase"></ion-icon>
+                            <ion-label style="font-size: 20px;"><b>{{provider.nomedaempresa}}</b></ion-label>
+                          </ion-item>            
+                          <ion-item lines="none" color="medium">
+                              <ion-icon slot="start" name="person"></ion-icon>
+                            <ion-label>{{provider.nome}}</ion-label>
+                          </ion-item>
+                        </ion-card>
+                    </ion-col>
+                  </ion-row>
+
+                <ion-row>
+                  <ion-col  text-center [routerLink]="['/index']">
+                    <div><ion-icon style="font-size: 25px;" name="pie"></ion-icon><p>Painel</p></div>
+                  </ion-col>
+                  <ion-col text-center [routerLink]="['/home']">
+                      <div><ion-icon style="font-size: 25px;" name="cart"></ion-icon><p>Estoque</p></div>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="provider.estoque == true">
+                    <ion-col text-center [routerLink]="['/list']">
+                      <div><ion-icon style="font-size: 25px;" name="time"></ion-icon><p>Compras</p></div>
+                    </ion-col>
+                    <ion-col text-center [routerLink]="['/listvendas']">
+                        <div><ion-icon style="font-size: 25px;" name="time"></ion-icon><p>Vendas</p></div>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="provider.controle == true">
+                      <ion-col text-center [routerLink]="['/prejuizo']">
+                        <div><ion-icon style="font-size: 25px;" name="trending-down"></ion-icon><p>Prejuízos</p></div>
+                      </ion-col>
+                      <ion-col text-center [routerLink]="['/despesasmensais']">
+                          <div><ion-icon style="font-size: 25px;" name="paper"></ion-icon><p>Despesas Mensais</p></div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col text-center [routerLink]="['/chat']">
+                          <div><ion-icon style="font-size: 25px;" name="ios-chatbubbles"></ion-icon><p>Chat</p></div>
+                        </ion-col>
+                        <ion-col text-center [routerLink]="['/contasareceber']">
+                            <div><ion-icon style="font-size: 25px;" name="cash"></ion-icon><p>Contas a Receber</p></div>
+                          </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col text-center [routerLink]="['/funcionario']">
+                            <div><ion-icon style="font-size: 25px;" name="people"></ion-icon><p *ngIf="provider.funcionario == true">Funcionários</p>
+                              <p *ngIf="provider.funcionario == false">Editar minhas informações</p></div>
+                          </ion-col>
+                          <ion-col  *ngIf="provider.funcionario == true" text-center [routerLink]="['/box']">
+                              <div><ion-icon style="font-size: 25px;" name="locate"></ion-icon><p>Box</p></div>
+                            </ion-col>
+                        </ion-row>
+              </ion-grid>
+            </ion-menu-toggle>
+          <ion-menu-toggle  auto-hide="false">
+          </ion-menu-toggle>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

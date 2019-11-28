@@ -1,0 +1,138 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons  [routerLink]="['/home']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title ><b>Total: R$:{{valortotal}}</b></ion-title>
+
+  </ion-toolbar>
+
+  </ion-header>
+<ion-content>
+  <div >
+    <form *ngFor="let index = index;let item of carrinho.itemcarrinho;">
+        <ion-list>
+          <h3 text-center>{{item.nome}}</h3>
+          <h5 text-center>Quantidades Disponiveis : {{item.quantidade}} </h5>
+          <h5 text-center> Preço Minimo de venda : {{item.precominimo}}</h5>
+          <ion-item class="div">
+              <ion-label position="floating"> Preço:</ion-label>
+              <ion-input (ionChange)="calcular()"  [(ngModel)]="this.carrinho.itemcarrinho[index].venderpreco" name="venderpreco" type="number"></ion-input>
+            </ion-item>
+          <ion-item class="div">
+              <ion-label position="floating"> Quantidade:</ion-label>
+            <ion-input (ionChange)="calcular()"  [(ngModel)]="this.carrinho.itemcarrinho[index].venderquantidade" name="venderquantidade" type="number" ></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
+    </div>
+
+
+
+<ion-grid *ngIf="venderaprazo == 4">
+<ion-row>
+   <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+      <ion-button (click)="venderaprazo = 6" style="color:blueviolet"   fill="clear" expand="full">
+        <b>Cadastrar <br> cliente</b>
+</ion-button>
+   </ion-col>
+   <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+      <ion-button (click)="venderaprazo = 5" style="color:blueviolet" fill="clear"  expand="full">
+          <b>Cliente <br> já Cadastrado</b></ion-button>
+   </ion-col>
+ </ion-row>
+</ion-grid>
+
+<form [formGroup]="vendercadastrarcliente" *ngIf="venderaprazo == 6" >
+   <ion-list>
+     <ion-item class="div">
+       <ion-input formControlName="nome" type="text" placeholder="Nome" ></ion-input>
+     </ion-item>
+     <ion-item class="div">
+       <ion-input formControlName="cpf" type="number" placeholder="Telefone"></ion-input>
+     </ion-item>
+   </ion-list>
+ </form>
+ 
+ <div *ngIf="venderaprazo == 5">
+     <ion-list>
+         <ion-item class="div">
+             <ion-label>Cliente:</ion-label>
+             <ion-select [(ngModel)]="idcliente" placeholder="Selecione">
+                <ion-select-option *ngFor="let item of clientes" value="{{item.id}}">{{item.nome}}</ion-select-option>
+               </ion-select>
+       </ion-item>
+     </ion-list>
+    </div>
+ 
+
+</ion-content>
+
+<ion-toolbar *ngIf="venderaprazo == 0" >
+  <ion-grid>
+      <ion-row>
+        <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+          <ion-button (click)="venderaprazo = 4" style="color:blueviolet" fill="clear"  expand="full">
+              <b>Vender aprazo</b></ion-button>
+       </ion-col>
+         <ion-col style="border: 1px solid  #a2a4ab;" text-center size="6">
+            <ion-button (click)="formadepagamento ='venderacartao';validar()" style="color:blueviolet" fill="clear"  expand="full">
+                <b>Vender a<br>
+                  Cartão</b></ion-button>
+         </ion-col>
+       </ion-row>
+       <ion-row>
+        <ion-col style="border: 1px solid  #a2a4ab;"  size="12" text-center>
+           <ion-button (click)="formadepagamento = 'venderadinheiro';validar()" style="color:blueviolet"   fill="clear" expand="full">
+             <b>Vender</b>
+   </ion-button>
+  </ion-col>
+</ion-row>
+     </ion-grid>
+       </ion-toolbar>
+
+
+       <ion-toolbar *ngIf="venderaprazo == 4">
+        <ion-grid>
+       <ion-row>
+        <ion-col style="border: 1px solid  #a2a4ab;"  size="12" text-center>
+           <ion-button (click)="venderaprazo = 0" style="color:blueviolet"   fill="clear" expand="full">
+             <b>Cencelar</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </ion-toolbar>
+
+    <ion-toolbar *ngIf="venderaprazo == 5" >
+      <ion-grid>
+          <ion-row>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+                <ion-button [disabled]="idcliente == undefined" (click)="formadepagamento = 'venderjacadastrado';validar()" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Vender</b></ion-button>
+             </ion-col>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+                <ion-button (click)="venderaprazo = 0" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Cancelar</b></ion-button>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+           </ion-toolbar>
+
+
+<ion-toolbar *ngIf="venderaprazo == 6" >
+      <ion-grid>
+          <ion-row>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+                <ion-button (click)="formadepagamento = 'vendercadastrar';validar()" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Vender</b></ion-button>
+             </ion-col>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="6" text-center>
+                <ion-button (click)="venderaprazo = 0" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Cancelar</b></ion-button>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+           </ion-toolbar>
+
+
+

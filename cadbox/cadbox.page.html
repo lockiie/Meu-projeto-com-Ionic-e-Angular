@@ -1,0 +1,28 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/box']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Cadastrar Box</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label color="medium" text-center><p>Os Boxes são os seus estoques, aqui você pode cadastrar um.</p></ion-label> 
+<form [formGroup]="form">
+<ion-item><br><br>
+    <ion-icon color="tertiary" slot="start" name="locate"></ion-icon>
+    <ion-input formControlName="box" type="text" placeholder="Nome do Box"></ion-input>
+  <ion-input></ion-input>
+</ion-item>
+</form>
+
+</ion-content>
+<ion-toolbar>
+<ion-row>
+  <ion-col style="border: 1px solid  #a2a4ab;" text-center>
+     <ion-button (click)="cadastrar()"  [disabled]="form.invalid" style="color:blueviolet" fill="clear"  expand="full">
+       <ion-icon name="checkmark"></ion-icon><br>  <b>Cadastrar</b></ion-button>
+  </ion-col>
+</ion-row>
+</ion-toolbar>

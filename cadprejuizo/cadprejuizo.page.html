@@ -1,0 +1,46 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/home']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Cadastrar Prejuízo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="form">
+  <ion-item>
+      <ion-icon slot="start" name="arrow-dropright"></ion-icon>
+      <ion-label position="floating" >Valor</ion-label>
+      <ion-label >{{vender.nomeprejuizo}}</ion-label>
+
+    </ion-item>
+ 
+      <ion-item>
+          <ion-icon slot="start" name="logo-usd"></ion-icon>
+          <ion-label position="floating">Valor</ion-label>
+          <ion-label >{{vender.precoprejuizo}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="arrow-dropright"></ion-icon>
+          <ion-label position="floating">Quantidade</ion-label>
+          <ion-input type="number" formControlName="quantidade"></ion-input>
+        </ion-item>
+            <ion-item>
+              <ion-label>Descrição</ion-label>
+              <ion-select formControlName="descricao" placeholder="Descrição">
+                <ion-select-option value="Defeito">Defeito</ion-select-option>
+                <ion-select-option value="Outros">Outros</ion-select-option>
+              </ion-select>
+            </ion-item>      
+        </form>
+</ion-content>
+<ion-toolbar>
+  <ion-row>
+      <ion-col style="border: 1px solid  #a2a4ab;" text-center>
+         <ion-button (click)="cadastrar()" [disabled]="form.invalid" style="color:blueviolet" fill="clear"  expand="full">
+           <ion-icon name="checkmark"></ion-icon><br>  <b>Cadastrar</b></ion-button>
+      </ion-col>
+    </ion-row>
+</ion-toolbar>

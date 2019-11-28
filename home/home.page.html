@@ -1,0 +1,110 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons *ngIf="teste == true" style="margin-left: 5px;" slot="start">
+          <ion-menu-button></ion-menu-button>
+
+        </ion-buttons>
+    <ion-title text-center *ngIf="teste == true" >Estoque</ion-title>
+    <ion-buttons *ngIf="teste == true" slot="end"  style="margin-right: 10px;">
+      <ion-button (click)="teste = false;"  ion-button icon-only>
+        <ion-icon name="ios-search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="teste == false"  slot="start">
+      <ion-button (click)="teste = true;" ion-button icon-only style="font-size: 15px;">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+<ion-searchbar (ionChange)="procurarprodutos()" [(ngModel)]="val" *ngIf="teste == false" ></ion-searchbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+    <ion-item>
+      <ion-label>Qual Estoque o Produto<br> está cadastrado?</ion-label>
+      <ion-select [(ngModel)]="ngbox" (ionChange)="produtos()" >
+        <ion-select-option *ngFor="let item of boxlist" value="{{item.box}}">{{item.box}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+</ion-list>
+
+<div *ngIf="produtoslist == undefined">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+  </ion-list>
+  </div>
+  <div *ngIf="produtoslist == 1"  style="position: absolute; left:20%;  top: 50%;">
+    <ion-item lines="none"><ion-icon color="light"  name="sad"></ion-icon>
+      <ion-label color="light">Não há itens registrados.</ion-label></ion-item>
+  </div>
+<div *ngIf="produtoslist">
+
+<ion-virtual-scroll [items]="produtoslist">
+
+  <div *virtualItem="let item;">
+  <ion-item lines="none"   id="{{item.id}}"  (click)="adicionaraocarrinho(item)">
+      <ion-thumbnail slot="start" (press)="presentActionSheet(item)">
+  <h1  text-center  *ngIf="item.quantidade > 0;" style="color: rgb(61, 194, 8)">{{item.quantidade}}</h1>
+  <h1   text-center  *ngIf="item.quantidade == 0;" style="color: rgba(255, 33, 4, 0.801)"><ion-icon   name="close"></ion-icon></h1>
+  
+      </ion-thumbnail>
+      <div>
+        <h5>{{item.nome}}</h5>
+        <p>{{item.descricao}}</p>
+      </div>
+      <ion-buttons *ngIf="item.quantidade == 0;" slot="end">
+        <ion-button (click)="editar(item)"  color="tertiary" fill="outline" slot="end" >
+  Acrescentar
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+</div>
+ </ion-virtual-scroll>
+
+</div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button *ngIf="addcarrinho == false"  [routerLink]="['/cadproduto']" color="light"  style="margin: 7px;">
+        <ion-icon   name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="addcarrinho == true" [routerLink]="['/carinho']" color="light"  style="margin: 7px;">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </ion-content>

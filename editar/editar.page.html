@@ -1,0 +1,56 @@
+<ion-header no-border >
+  <ion-toolbar color="medium" >
+         <ion-buttons [routerLink]="['/home']"  style="margin-left: 5px; font-size: 35px;" slot="start">
+            <ion-icon name="ios-arrow-round-back"></ion-icon>
+                    </ion-buttons>
+    <ion-title>Editar Produto </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formcadproduto">
+      <ion-list no-lines>
+        <ion-item class="div">
+            <ion-label position="floating">Nome do produto</ion-label>
+          <ion-input  type="text" formControlName="nome"
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+          <ion-label position="floating">Quantidade</ion-label>
+          <ion-input  type="number" formControlName="quantidade" 
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+            <ion-label position="floating">Preço minimo para a venda</ion-label>
+            <ion-input  type="number" formControlName="pm" 
+            ></ion-input>
+          </ion-item>
+        <ion-item class="div">
+            <ion-label position="floating">Descrição</ion-label>
+          <ion-input  type="text"  formControlName="descricao" 
+          ></ion-input>
+        </ion-item>
+        <ion-item class="div">
+          <ion-label >Box:</ion-label>
+          <ion-select formControlName="box" placeholder="Selecione">
+              <ion-select-option  *ngFor="let item of boxlist" value="{{item.box}}">{{item.box}}</ion-select-option>
+            </ion-select>
+    </ion-item>
+      </ion-list>
+    </form>
+
+
+
+</ion-content>
+  <ion-toolbar >
+      <ion-grid>
+          <ion-row>
+             <ion-col style="border: 1px solid  #a2a4ab;"  size="12" text-center>
+                <ion-button (click)="editar()" [disabled]="formcadproduto.invalid" style="color:blueviolet"   fill="clear" expand="full">
+                  <b>Editar Produto</b>
+        </ion-button>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+           </ion-toolbar>
